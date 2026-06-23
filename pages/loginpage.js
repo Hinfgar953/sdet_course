@@ -15,4 +15,23 @@ exports.LoginPage = class LoginPage {
   async gotomainpage() {
     await this.page.goto("https://www.saucedemo.com/");
   }
+
+  getErrorMessage() {
+  return this.page.getByText("Epic sadface: Username and password do not match any user in this service")
+  }
+
+  getLockedMessage(){
+  return this.page.getByText("Epic sadface: Sorry, this user has been locked out.")
+  }
+
+  getEmptyUserError(){
+  return this.page.getByText("Epic sadface: Username is required")
+  }
+
+  getEmptyPasswordError(){
+  return this.page.getByText("Epic sadface: Password is required")
+  }
+
+
+
 };

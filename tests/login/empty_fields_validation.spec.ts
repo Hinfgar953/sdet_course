@@ -5,28 +5,26 @@ test("login with empty email", async ({ page }) => {
  const loginConst=new LoginPage(page)
 
   //1.Go to login page
-  loginConst.gotomainpage()
+  await loginConst.gotomainpage()
 
   //2.Try to submit login with empty username field
-  loginConst.login("","secret_sauce")
+  await loginConst.login("","secret_sauce")
 
   //3.Validate the error displayed
-  await expect (page.getByText("Epic sadface: Username is required")).toBeVisible()
-  await page.locator('[data-test="error"]').click();await page.locator('[data-test="error-button"]').click();
+  await expect (loginConst.getEmptyUserError()).toBeVisible()
   });
 
 test("login with empty password",async ({page}) => {
   const loginConst=new LoginPage(page)
 
   //1.Go to login page
-  loginConst.gotomainpage()
+  await loginConst.gotomainpage()
 
   //2.Try to submit login with an empty password
-  await expect (page.getByText("Epic sadface: Username is required")).toBeHidden()
-  loginConst.login("locked_out_user","")
+  await loginConst.login("locked_out_user","")
 
   //3 verify the error displayed
-  await expect (page.getByText("Epic sadface: Password is required")).toBeVisible()
+  await expect (loginConst.getEmptyPasswordError()).toBeVisible()
    
 })
   
