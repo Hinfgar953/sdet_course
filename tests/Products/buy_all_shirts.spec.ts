@@ -7,7 +7,7 @@ test("Add all the shirts on inventory to the cart and complete checkout",async (
     const constructorProducts=new ProductsPage(page)    
     const constructorCHeckout=new CheckoutPage(page)
     await page.goto("/")
-    await constructorProducts.login(process.env.USER,process.env.PASSWORD)
+    await constructorProducts.login(process.env.SAUCE_USER,process.env.SAUCE_PASSWORD)
 
     //1.Call the buy shirts method where detects all the products tha are shirts and ad those to the cart
     await constructorProducts.buyshirts()

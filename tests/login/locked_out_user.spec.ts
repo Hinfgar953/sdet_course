@@ -7,7 +7,7 @@ const loginconst=new LoginPage(page)
 await page.goto("/")
 
 //2.Login with a locked user
-await loginconst.login(process.env.LOCKEDUSER ?? "locked_out_user",process.env.PASSWORD ?? "secret_sauce")
+await loginconst.login(process.env.SAUCE_LOCKED_USER?? "locked_out_user",process.env.SAUCE_PASSWORD ?? "secret_sauce")
 
 
 //Validate the error displayed

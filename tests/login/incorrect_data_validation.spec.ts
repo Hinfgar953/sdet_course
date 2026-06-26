@@ -8,11 +8,12 @@ test("Test the login with invalid data",async ({page}) => {
  await page.goto("/")
 
  //2.Enter invalid data on the username and validate the error
- await loginConstructor.login(process.env.USER ?? "standard_user", "password")
+ await loginConstructor.login("anyuser",process.env.SAUCE_PASSWORD ?? "secret_sauce")
+
  await expect(loginConstructor.getErrorMessage()).toBeVisible()
 
  //3.Enter invalid password
- await loginConstructor.login(process.env.USER,"password")
+ await loginConstructor.login(process.env.SAUCE_USER?? "locked_out_user","secrGRERTHet_sauce")
  await expect(loginConstructor.getErrorMessage()).toBeVisible()
 
 }) 

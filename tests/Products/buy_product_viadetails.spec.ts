@@ -9,7 +9,7 @@ test("Buy a product via details", async ({page}) => {
 const constructorProducts=new ProductsPage(page)
 const constructorCHeckout=new CheckoutPage(page)
 await page.goto("/")
-await constructorProducts.login(process.env.USER,process.env.PASSWORD)
+await constructorProducts.login(process.env.SAUCE_USER,process.env.SAUCE_PASSWORD)
 
 //2.Select a product on the products page and check if we are redirected to the item details ur
 await constructorProducts.verifyInventoryURL()

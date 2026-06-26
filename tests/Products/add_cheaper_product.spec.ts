@@ -6,7 +6,7 @@ test("Add the cheaper product to the cart",async ({page}) => {
 
 //1.Login and add the lowest price product to cart
     await page.goto("/")
-    await constructorProd.login(process.env.USER,process.env.PASSWORD)
+    await constructorProd.login(process.env.SAUCE_USER,process.env.SAUCE_PASSWORD)
     await constructorProd.verifyInventoryURL()
     await constructorProd.addlowestprice()
 //1.1 saved the product name on a variable to compare after on the cart
