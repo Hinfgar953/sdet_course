@@ -1,7 +1,7 @@
 import {test, expect} from "@playwright/test";
 import {ProductsPage} from "../../pages/productspage";
 
-test("Addlowest",async ({page}) => {
+test("Add the cheaper product to the cart",async ({page}) => {
     const constructorProd=new ProductsPage(page)
 
 
