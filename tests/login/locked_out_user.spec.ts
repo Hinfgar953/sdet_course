@@ -4,10 +4,10 @@ test("Testing the login with a locked out user",async ({page}) => {
 const loginconst=new LoginPage(page)
 
 //1.Go to the main page
-await loginconst.gotomainpage()
+await page.goto("/")
 
 //2.Login with a locked user
-await loginconst.login("locked_out_user","secret_sauce")
+await loginconst.login(process.env.LOCKEDUSER,process.env.PASSWORD)
 
 //Validate the error displayed
 await expect(loginconst.getLockedMessage()).toBeVisible()

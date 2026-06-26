@@ -1,4 +1,11 @@
-exports.LoginPage = class LoginPage {
+import { expect } from "@playwright/test";
+const ERRORS = {
+  invalidCredentials: "Epic sadface: Username and password do not match any user in this service",
+  lockedUser: "Epic sadface: Sorry, this user has been locked out.",
+  emptyUser: "Epic sadface: Username is required",
+  emptyPassword: "Epic sadface: Password is required"
+}
+export class LoginPage {
   constructor(page) {
     this.page = page;
     this.email_textbox = page.getByPlaceholder("Username");
@@ -11,24 +18,26 @@ exports.LoginPage = class LoginPage {
     await this.password_textbox.fill(password);
     await this.login_button.click();
   }
-  async gotomainpage() {
-    await this.page.goto("https://www.saucedemo.com/");
+  
+  async verifyLoginSuccess(){
+    await expect(this.page.getByText("Products")).toBeVisible();
   }
+ 
 
   getErrorMessage() {
-  return this.page.getByText("Epic sadface: Username and password do not match any user in this service")
+  return this.page.getByText(ERRORS.invalidCredentials)
   }
 
   getLockedMessage(){
-  return this.page.getByText("Epic sadface: Sorry, this user has been locked out.")
+  return this.page.getByText(ERRORS.lockedUser)
   }
 
   getEmptyUserError(){
-  return this.page.getByText("Epic sadface: Username is required")
+  return this.page.getByText(ERRORS.emptyUser)
   }
 
   getEmptyPasswordError(){
-  return this.page.getByText("Epic sadface: Password is required")
+  return this.page.getByText(ERRORS.emptyPassword)
   }
 
 

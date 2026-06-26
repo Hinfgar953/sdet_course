@@ -5,14 +5,14 @@ test("Test the login with invalid data",async ({page}) => {
  const loginConstructor=new LoginPage(page)
 
  //1.Go to the login main page
- await loginConstructor.gotomainpage()
+ await page.goto("/")
 
  //2.Enter invalid data on the username and validate the error
- await loginConstructor.login("userinfante","secret_sauce")
+ await loginConstructor.login("userinfante",process.env.PASSWORD)
  await expect(loginConstructor.getErrorMessage()).toBeVisible()
 
  //3.Enter invalid password
- await loginConstructor.login("standard_user","password")
+ await loginConstructor.login(process.env.USER,"password")
  await expect(loginConstructor.getErrorMessage()).toBeVisible()
 
 }) 

@@ -1,4 +1,5 @@
-exports.CheckoutPage= class CheckoutPage{
+import { expect } from "@playwright/test";
+export class CheckoutPage{
   constructor(page) {
     this.firstnameinput = page.locator('[data-test="firstName"]');
     this.lastnameinput = page.locator('[data-test="lastName"]');
@@ -20,5 +21,10 @@ exports.CheckoutPage= class CheckoutPage{
 
 async completeOrder(){
     await this.finishbutton.click()  
+}
+
+async verifyTotal(){
+    await expect(this.totallabel).toBeVisible();
+
 }
 }

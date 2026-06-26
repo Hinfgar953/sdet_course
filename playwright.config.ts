@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import { PlaywrightTestConfig } from '@playwright/test';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 
 /**
  * Read environment variables from file.
@@ -29,6 +33,7 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    baseURL: 'https://www.saucedemo.com',
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
     ignoreHTTPSErrors:true,
@@ -78,4 +83,5 @@ export default defineConfig({
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+  
 });

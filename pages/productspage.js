@@ -9,6 +9,7 @@ exports.ProductsPage = class ProductsPage extends LoginPage {
     this.activefilter = page.getByRole("combobox");
     this.carticon = page.locator("span.shopping_cart_badge");
     this.shirtsbutton = page.locator('[id*="t-shirt"]');
+    this.selectedproduct=page.locator("[data-test='inventory-item-name']")
 
     
   }
@@ -28,7 +29,7 @@ exports.ProductsPage = class ProductsPage extends LoginPage {
   }
 
    getCartItemName() {
-    return this.page.locator("[data-test='inventory-item-name']");
+    return this.selectedproduct
   }
 
   async buyshirts() {
@@ -37,13 +38,34 @@ exports.ProductsPage = class ProductsPage extends LoginPage {
       const idShirt = await shirt.getAttribute("id");
        await shirt.click();
       
-    }
-  
-   
-     
+    } 
   }
+
+  async selectproduct(){
+    const productscount = await this.selectedproduct.count();
+    const productindex = Math.floor(Math.random() * productscount);
+    await this.selectedproduct.nth(productindex).click();
   
+  }
 
+  async addtocart(){
+    await this.lowest_button.click()
+  }
 
+  async verifyInventoryURL() {
+  await expect(this.page).toHaveURL("https://www.saucedemo.com/inventory.html")
+  }
+
+  async verifyAllItemsAreShirts() {
+  await expect(this.getCartItemName().first()).toContainText("T-Shirt");
+  await expect(this.getCartItemName().last()).toContainText("T-Shirt");
+  }
+
+  async verifyRemoveButton(){
+  await expect(this.page.getByRole("button").getByText("Remove")).toBeVisible()
+  }
+
+  
+  
 
 };
